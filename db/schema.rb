@@ -10,32 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223204312) do
+ActiveRecord::Schema.define(version: 20170224021313) do
 
-  create_table "h1_tags", force: :cascade do |t|
+  create_table "h_one_tags", force: :cascade do |t|
+    t.string   "content",    null: false
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h1_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_one_tags_on_url_id"
   end
 
-  create_table "h2_tags", force: :cascade do |t|
+  create_table "h_three_tags", force: :cascade do |t|
+    t.string   "content",    null: false
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h2_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_three_tags_on_url_id"
   end
 
-  create_table "h3_tags", force: :cascade do |t|
+  create_table "h_two_tags", force: :cascade do |t|
+    t.string   "content",    null: false
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h3_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_two_tags_on_url_id"
   end
 
   create_table "internal_links", force: :cascade do |t|
     t.integer  "url_id"
-    t.string   "content",    null: false
+    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url_id"], name: "index_internal_links_on_url_id"
