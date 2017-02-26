@@ -19,7 +19,6 @@ class Api::V1::UrlsController < ApplicationController
     url = Url.new(url_params)
 
     if url.save
-      p "hello"
       html_file = open(url.name)
       nokogiri_doc = Nokogiri.parse(html_file)
 
@@ -65,20 +64,6 @@ class Api::V1::UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:name)
-  end
-
-  def clean(html_string)
-    remove_all_white_space_between_tags(condense_whitespace(html_string)).strip
-  end
-
-  WHITE_SPACE_BETWEEN_TAGS = /(?<=>)\s+(?=<)/
-
-  def remove_all_white_space_between_tags(html_string)
-    html_string.gsub(WHITE_SPACE_BETWEEN_TAGS, "")
-  end
-
-  def condense_whitespace(html_string)
-    html_string.gsub(/\s+/, ' ')
   end
   
 end
