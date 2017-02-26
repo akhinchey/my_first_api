@@ -15,17 +15,17 @@ RSpec.describe "UrlsController", :type => :request do
     end
   end
 
-    describe "POST /urls" do
-      it "stores valid urls in JSON format" do
-        headers = {
+  describe "POST /urls" do
+    it "stores valid urls in JSON format" do
+      headers = {
           "ACCEPT" => "application/json"
-        }
-        post "http://localhost:3000/api/v1/urls", params: { :url => {:name => "https://www.nytimes.com/"} }, headers:headers
+      }
+      post "http://localhost:3000/api/v1/urls", params: { :url => {:name => "https://www.nytimes.com/"} }, headers:headers
 
-        expect(response.content_type).to eq("application/json")
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response.content_type).to eq("application/json")
+      expect(response).to have_http_status(:ok)
     end
+  end
 
 end
 

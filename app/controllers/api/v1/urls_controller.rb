@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'uri'
 
 class Api::V1::UrlsController < ApplicationController
   # skip_before_action :verify_authenticity_token
@@ -18,7 +19,8 @@ class Api::V1::UrlsController < ApplicationController
   def create
     url = Url.new(url_params)
 
-    if url.save
+    if valid_url?(url.name)
+      url.save
       html_file = open(url.name)
       nokogiri_doc = Nokogiri.parse(html_file)
 
@@ -64,6 +66,19 @@ class Api::V1::UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:name)
+  end
+
+  # def valid_url_string?(url)
+  #   uri = URI.parse(url)
+  #   uri.is_a?(URI::HTTP) && !uri.host.nil?
+  #     rescue URI::InvalidURIError
+  #   false
+  # end
+
+  def valid_url?(url)
+    open(url)
+    rescue => ex
+    false 
   end
   
 end
