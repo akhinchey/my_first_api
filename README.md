@@ -1,24 +1,21 @@
-# README
+# My First API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple API with two endpoints: 
+- a POST that receives a url and indexes the content
+- a GET that lists previously stored urls 
 
-Things you may want to cover:
+Things to know:
 
 * Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+* Requirements:
+- ruby ~> 2.2.4
+- Rails 5
+- PostgreSQL
 
 * Deployment instructions
-
-* ...
+- Make sure PostgreSQL is running on your machine 
+- Clone and download this repo
+- cd into the repo in your terminal 
+- run 'bundle install' 
+- start the server!

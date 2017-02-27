@@ -1,5 +1,4 @@
 require "rails_helper"
-require "airborne"
 
 RSpec.describe "UrlsController", :type => :request do
 
