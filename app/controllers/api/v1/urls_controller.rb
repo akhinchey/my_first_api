@@ -23,32 +23,32 @@ class Api::V1::UrlsController < ApplicationController
       nokogiri_doc = Nokogiri.parse(html_file)
 
       nokogiri_doc.css('a').each do |link_url|
-        next if link_url.attributes['href'] == ""
+        next if link_url.attributes['href'] == ''
         url.internal_links.create(name: link_url.inner_text, content: link_url.attributes['href'])
       end
 
       nokogiri_doc.css('h1').each do |h1|
-        next if h1.inner_text == ""
+        next if h1.inner_text == ''
         url.h_one_tags.create(content: h1.inner_text.strip)
       end
 
       nokogiri_doc.css('h2').each do |h2|
-        next if h2.inner_text == ""
+        next if h2.inner_text == ''
         url.h_two_tags.create(content: h2.inner_text.strip)
       end
 
       nokogiri_doc.css('h3').each do |h3|
-        next if h3.inner_text == ""
+        next if h3.inner_text == ''
         url.h_three_tags.create(content: h3.inner_text.strip)
       end
 
       render status: 200, json: {
-        message: "Success!",
+        message: 'Success!',
         url: url
       }.to_json
     else
       render status: 422, json: {
-        message: "Url and contents could not be saved."
+        message: 'Url and contents could not be saved.'
       }.to_json
     end
   end
