@@ -25,30 +25,32 @@ class Api::V1::UrlsController < ApplicationController
       nokogiri_doc = Nokogiri.parse(html_file)
 
       nokogiri_doc.css('a').each do |link_url|
+        next if link_url.attributes == ""
         url.internal_links.create(content: link_url.attributes['href'])
       end
 
       nokogiri_doc.css('h1').each do |h1|
+        next if h1.inner_text == ""
         url.h_one_tags.create(content: h1.inner_text.strip)
       end
 
       nokogiri_doc.css('h2').each do |h2|
+        next if h2.inner_text == ""
         url.h_two_tags.create(content: h2.inner_text.strip)
       end
 
       nokogiri_doc.css('h3').each do |h3|
+        next if h3.inner_text == ""
         url.h_three_tags.create(content: h3.inner_text.strip)
       end
 
-      render json: {
-        status: 200,
+      render status: 200, json: {
         message: "Success!",
         url: url
       }.to_json
     else
-      render json: {
-        status: 500,
-        errors: url.errors
+      render status: 422, json: {
+        message: "Url and contents could not be saved."
       }.to_json
     end
   end
@@ -56,8 +58,7 @@ class Api::V1::UrlsController < ApplicationController
   def destroy 
     url = Url.find(params[:id])
     url.destroy
-    render json: {
-    status: 200,
+    render status: 200, json: {
     message: "Successfully deleted."
     }.to_json
   end
@@ -67,13 +68,6 @@ class Api::V1::UrlsController < ApplicationController
   def url_params
     params.require(:url).permit(:name)
   end
-
-  # def valid_url_string?(url)
-  #   uri = URI.parse(url)
-  #   uri.is_a?(URI::HTTP) && !uri.host.nil?
-  #     rescue URI::InvalidURIError
-  #   false
-  # end
 
   def valid_url?(url)
     open(url)
