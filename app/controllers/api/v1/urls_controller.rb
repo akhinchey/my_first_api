@@ -3,8 +3,6 @@ require 'open-uri'
 require 'uri'
 
 class Api::V1::UrlsController < ApplicationController
-  # skip_before_action :verify_authenticity_token
-  # respond_to :json
 
   def index
     urls = Url.all
@@ -25,8 +23,8 @@ class Api::V1::UrlsController < ApplicationController
       nokogiri_doc = Nokogiri.parse(html_file)
 
       nokogiri_doc.css('a').each do |link_url|
-        next if link_url.attributes == ""
-        url.internal_links.create(content: link_url.attributes['href'])
+        next if link_url.attributes['href'] == ""
+        url.internal_links.create(name: link_url.inner_text, content: link_url.attributes['href'])
       end
 
       nokogiri_doc.css('h1').each do |h1|
@@ -53,14 +51,6 @@ class Api::V1::UrlsController < ApplicationController
         message: "Url and contents could not be saved."
       }.to_json
     end
-  end
-
-  def destroy 
-    url = Url.find(params[:id])
-    url.destroy
-    render status: 200, json: {
-    message: "Successfully deleted."
-    }.to_json
   end
 
   private

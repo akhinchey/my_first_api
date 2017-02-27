@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20170224021313) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "h_one_tags", force: :cascade do |t|
     t.string   "content",    null: false
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h_one_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_one_tags_on_url_id", using: :btree
   end
 
   create_table "h_three_tags", force: :cascade do |t|
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170224021313) do
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h_three_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_three_tags_on_url_id", using: :btree
   end
 
   create_table "h_two_tags", force: :cascade do |t|
@@ -33,15 +36,16 @@ ActiveRecord::Schema.define(version: 20170224021313) do
     t.integer  "url_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_h_two_tags_on_url_id"
+    t.index ["url_id"], name: "index_h_two_tags_on_url_id", using: :btree
   end
 
   create_table "internal_links", force: :cascade do |t|
     t.integer  "url_id"
-    t.string   "content"
+    t.string   "name",       null: false
+    t.string   "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url_id"], name: "index_internal_links_on_url_id"
+    t.index ["url_id"], name: "index_internal_links_on_url_id", using: :btree
   end
 
   create_table "urls", force: :cascade do |t|
