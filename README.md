@@ -6,16 +6,17 @@ A simple API with two endpoints:
 
 Things to know:
 
-* Ruby version
-
 * Requirements:
-- ruby ~> 2.2.4
-- Rails 5
-- PostgreSQL
+ruby ~> 2.2.4
+Rails 5
+PostgreSQL
 
 * Deployment instructions
 - Make sure PostgreSQL is running on your machine 
 - Clone and download this repo
 - cd into the repo in your terminal 
-- run 'bundle install' 
+- run 'bundle install'
+```
+bundle install
+``` 
 - start the server!
